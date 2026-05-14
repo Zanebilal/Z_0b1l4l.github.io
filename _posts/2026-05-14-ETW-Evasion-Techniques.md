@@ -202,7 +202,7 @@ While Technique 1 works, it has a drawback: it uses `VirtualProtect` to set `RWX
 To avoid this, we hook `EtwpEventWriteFull` using hardware breakpoints. As seen in the x64dbg output, all three patched WinAPIs call `EtwpEventWriteFull` before they return — so hooking it once covers all of them.
 
 > Resources on hardware breakpoints:
-> - [http://www.nynaeve.net/?p=80](http://www.nynaeve.net/?p=80)
+> - [https://www.nynaeve.net/?p=80](https://www.nynaeve.net/?p=80)
 > - [Hardware vs Software Breakpoints (StackOverflow)](https://stackoverflow.com/questions/8878716/what-is-the-difference-between-hardware-and-software-breakpoints)
 > - [Vectored Exception Handling (Microsoft)](https://learn.microsoft.com/en-us/windows/win32/debug/vectored-exception-handling)
 
