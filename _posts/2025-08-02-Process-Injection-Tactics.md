@@ -356,18 +356,6 @@ int main() {
 
 ---
 
-## Detection Notes
-
-| Signal | Technique | Noise Level |
-|---|---|---|
-| RW allocation followed by RWX `VirtualProtect` | Both | Medium |
-| `QueueUserAPC` targeting an address outside any module | Both | Medium |
-| `CreateProcessA` with `DEBUG_PROCESS` on a system binary | Early-Bird | Medium-High |
-| Short debug session ending with `DebugActiveProcessStop` | Early-Bird | Medium |
-| IPv6-formatted strings that decode to shellcode | Both | Low static detection |
-
----
-
 ## References
 
 - [Microsoft Docs — QueueUserAPC](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-queueuserapc)
