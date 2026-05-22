@@ -1,6 +1,6 @@
 ---
 title: "Living Inside Another Process: The Art of Injection"
-date: 2025-10-19 15:07:00 +0000
+date: 2025-08-05 15:07:00 +0000
 categories: [Red Team, Injection]
 tags: [process, windows-internals, malware-analysis,malware-dev]
 description: "A common way used by ethical hackers in red team engagements and by hacker when creating malware is hiding there processes inside a legitimate process. In this blog we will discuss the art of injecting malicious process in a trusted legit process , so we can evade static detection and reduce noise"
