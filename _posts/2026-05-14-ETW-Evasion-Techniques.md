@@ -1,12 +1,13 @@
 ---
 title: "ETW Evasion Techniques: Byte Patching, Hardware Breakpoints & Session Hijacking"
 date: 2025-10-19 09:37:00 +0000
-categories: [Red Team, Windows Internals]
+categories: [Red Team, Evasion]
 tags: [etw, windows-internals, malware-analysis, edr, evasion, c]
 description: "A complete guide to evading Event Tracing for Windows (ETW) using byte patching, hardware breakpoints, and session hijacking — all written in C."
 ---
 
-> **Before we begin:** All code discussed in this blog is available in my GitHub repo:  
+> hi i am  zane bilal , a computer science student and an adventurer in the offensive side of cybersecurity.\ 
+**Before we begin:** All code discussed in this blog is available in my GitHub repo:  
 > [https://github.com/Zanebilal/ETW-Evasion](https://github.com/Zanebilal/ETW-Evasion)
 
 Welcome to this write-up on Event Tracing for Windows (ETW). This covers multiple techniques for bypassing ETW — a telemetry source heavily used by EDR systems and blue-team detection. Before diving deeper, you should have a basic familiarity with ETW: what it is, its components, and how it works internally. Here are some resources to get you up to speed:
@@ -552,16 +553,6 @@ logman query "Test Session" -ets
 Set `TARGET_SESSION_NAME` and `FAKE_LOG_FILE` in the code, then run the program as administrator. Querying the session again will show the updated log file path — all telemetry data now flows to your hijacked file, and ETW consumers can no longer read the original logs.
 
 ---
-
-## Conclusion
-
-This write-up covered three ETW evasion techniques:
-
-| Technique | Mechanism | Drawback |
-|-----------|-----------|----------|
-| Byte Patching | Patches `EtwEventWrite*` + `NtTraceEvent` | RWX memory is suspicious; detectable by memory scanners |
-| Hardware Breakpoints | Hooks `EtwpEventWriteFull` via HBPs | Targets only one function; misses other event writers |
-| Session Hijacking | Redirects session output to attacker-controlled file | Only works for disk-logging sessions, not real-time ones |
 
 For real-time session consumers (like ProcMon), you would need to hook the API that providers use to write events (e.g., `EtwEventWrite` — discussed in Technique 1) or modify the kernel driver behavior itself.
 
