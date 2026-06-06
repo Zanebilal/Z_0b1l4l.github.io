@@ -4,6 +4,9 @@ date: 2025-05-25 12:58:00 +0000
 categories: [Red Team, Windows Internals]
 tags: [windows-internals, malware-dev, kernel, driver]
 description: "A ground-up introduction to Windows kernel architecture, kernel objects, the EPROCESS structure, and user-to-kernel communication via IOCTL — written for security researchers and malware developers."
+image:
+  path: /assets/images/windows-internal/kernel-cover.png
+  alt: "opening the kernel door"
 ---
 
 > Hi, I'm **Zane Bilal** — a computer science student and explorer of the offensive side of cybersecurity. In the world of malware, exploit development, and low-level programming, understanding *how things are built* is non-negotiable. This blog series covers the essential Windows internals that every security researcher needs to understand, starting from the kernel itself.
@@ -42,7 +45,7 @@ Rings 1 and 2 exist in the CPU spec but are unused by Windows.
 6. File Systems: Manage storage.
 7. Networking Subsystem: Handles network operations.
 
-	![Windows architecture diagram](/assets/images/windows-architecture.png)
+	![Windows architecture diagram](/assets/images/windows-internal/windows-architecture.png)
 
 
 -----
@@ -106,7 +109,7 @@ typedef struct _LIST_ENTRY {
 
 > ⚠️ **Critical detail:** `Flink` and `Blink` point to the **`ActiveProcessLinks` field** of the neighbouring `EPROCESS` — *not* to the base of that `EPROCESS`. To recover the base address of the next `EPROCESS`, you must **subtract the offset of `ActiveProcessLinks`** from the `Flink` value. This offset varies per Windows version — another reason to always query it dynamically.
 
-		![notepad's `EPROCESS` and its ActiveProcessLinks taken from windbg](/assets/images/>notepad_EPROCESS.png)
+		![notepad's `EPROCESS` and its ActiveProcessLinks taken from windbg](/assets/images/windows-internal/notepad_EPROCESS.png)
 
 
 ### Retrieving the EPROCESS Address from User Mode via a Driver
