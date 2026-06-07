@@ -1,6 +1,6 @@
 ---
 title: "Knocking on Ring 0: A Malware Dev's Guide to the Windows Kernel — Part 02"
-date: 2026-06-07 15:55:00 +0000
+date: 2026-06-06 15:55:00 +0000
 categories: [Red Team, Windows Internals]
 tags: [windows-internals, malware-dev, kernel, driver, privilege-escalation,token-stealing, process-protection]
 description: "Part 02 covers practical kernel object manipulation: handle privilege elevation, token stealing, privilege bit manipulation, integrity level modification, unrestricted tokens, and bypassing process protection — all via a vulnerable driver."
