@@ -3,13 +3,13 @@ title: "Knocking on Ring 0: A Malware Dev's Guide to the Windows Kernel — Part
 date: 2026-06-07 15:55:00 +0000
 categories: [Red Team, Windows Internals]
 tags: [windows-internals, malware-dev, kernel, driver, privilege-escalation,token-stealing, process-protection]
-description: "Part 02 covers practical kernel object manipulation: handle privilege elevation, token stealing, privilege bit manipulation, integrity level modification, unrestricting tokens, and bypassing process protection — all via a vulnerable driver."
+description: "Part 02 covers practical kernel object manipulation: handle privilege elevation, token stealing, privilege bit manipulation, integrity level modification, unrestricted tokens, and bypassing process protection — all via a vulnerable driver."
 image:
   path: /assets/images/windows-internal/kernel-part02-cover.png
   alt: "Windows kernel object manipulation"
 ---
 
-> Hi, I'm **Zane Bilal** — a computer science student and explorer of the offensive side of cybersecurity. This post continues directly from [Part 01](/posts/Entering-kernel-PART-01/), where we covered the Windows kernel architecture, EPROCESS, and user-to-kernel communication via IOCTL. In this part we get hands-on: we manipulate kernel objects directly to elevate privileges, steal tokens, and bypass process protections.
+> Hi, I'm **Zane Bilal** — a computer science student and explorer of the offensive side of cybersecurity. This post continues directly from [Part 01](/posts/Entering-kernel-PART-01/), where we covered the Windows kernel architecture, `EPROCESS`, and user-to-kernel communication via IOCTL. In this part we get hands-on: we manipulate kernel objects directly to elevate privileges, steal tokens, and bypass process protections.
 
 
 ---
