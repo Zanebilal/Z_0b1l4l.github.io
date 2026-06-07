@@ -1,6 +1,6 @@
 ---
 title: "Knocking on Ring 0: A Malware Dev's Guide to the Windows Kernel — Part 01"
-date: 2025-05-25 12:58:00 +0000
+date: 2026-05-25 12:58:00 +0000
 categories: [Red Team, Windows Internals]
 tags: [windows-internals, malware-dev, kernel, driver]
 description: "A ground-up introduction to Windows kernel architecture, kernel objects, the EPROCESS structure, and user-to-kernel communication via IOCTL — written for security researchers and malware developers."
@@ -44,6 +44,7 @@ Rings 1 and 2 exist in the CPU spec but are unused by Windows.
 5. Device Drivers: Interface with hardware devices.
 6. File Systems: Manage storage.
 7. Networking Subsystem: Handles network operations.
+
 
 ![Windows architecture diagram](/assets/images/windows-internal/windows-architecture.png)
 
