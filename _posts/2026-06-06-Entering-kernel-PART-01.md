@@ -109,7 +109,7 @@ typedef struct _LIST_ENTRY {
 
 > ⚠️ **Critical detail:** `Flink` and `Blink` point to the **`ActiveProcessLinks` field** of the neighbouring `EPROCESS` — *not* to the base of that `EPROCESS`. To recover the base address of the next `EPROCESS`, you must **subtract the offset of `ActiveProcessLinks`** from the `Flink` value. This offset varies per Windows version — another reason to always query it dynamically.
 
-![notepad's `EPROCESS` and its ActiveProcessLinks taken from windbg](/assets/images/windows-internal/notepad_EPROCESS.png)
+![notepad's `EPROCESS` and its ActiveProcessLinks taken from windbg](/assets/images/windows-internal/notepad-EPROCESS.png)
 
 
 ### Retrieving the EPROCESS Address from User Mode via a Driver
