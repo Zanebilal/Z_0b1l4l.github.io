@@ -1,6 +1,6 @@
 ---
 title: "Hack-The-Box : 'The Payload'  Sherlock challenge writeup"
-date: 2026-06-27 13:22:00 +0000
+date: 2026-07-27 13:22:00 +0000
 categories: [Writeups, Malware Analysis]
 tags: [windows-internals, malware-dev, malware-analysis, reverse-engineering, malware-CTF]
 description: "solving a medium malware analysis challenge from hack the box"
