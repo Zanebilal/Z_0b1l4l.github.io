@@ -27,10 +27,10 @@ A .pdb file most commonly stands for a Program Database file, a format developed
 
 before answering the question we need to understand this new term `COM`, what does it mean and why it is used ??
 So `COM` stands for Component Object Model, a Microsoft technology that lets different software programs talk and share features with each other, To use it, a program must first initialize the COM library (That contains all the necessary function to achieve the process of communication). The key functions for this are `CoInitialize` and `CoUninitialize`. By examining the executable’s import table, we can see which DLL provides these functions.
-we can see all the import dll in various way using IDA or x64dbg of PeBear, but i will keep it simple and static i will use objdump as shown bellow 
+we can see all the import dll in various way using IDA or x64dbg of PeBear ,but i will keep it simple and i will use IDA import tab  as shown bellow
 
 
-![ imported dll's with their functions ](/assets/images/writeups/malware-analysis/The-Payload/objdumo-outout.png)
+![ imported dll's with their functions ](/assets/images/writeups/malware-analysis/The-Payload/com-dll.png)
 
 
 as seen in the image we can clearly identify that the functions used in COM like `CoInitialize` and it is under the `ole32.dll` dll name which is our correct answer 
@@ -128,4 +128,45 @@ To check a “killswitch domain,” the malware must perform a DNS lookup. We ca
 
 ## Which network-related API does the binary use to gather details about each shared resource on a server?
 
+again look at the import table for functions related to this. and we find two interesting functions being used from the `NETAPI32` library `NetShareEnum` and `NetApiBufferFree`and with a small google search we get the definition of the `NetShareEnum` which is a Windows API call used to retrieve information about shared resources on a local or remote compute, making it the correct answer.
+
+## Which Opcode is responsible for running the encrypted payload?
+
+navigate to the  `ScanAndSpread` function, we see another COM method call that is responsible for executing the main payload on a remote machine.
+```c
+             (*(void (__fastcall **)(__int64, __int64, _QWORD, _QWORD))(*(_QWORD *)v37 + 96LL))(
+                v37,
+                v50,
+                *(_QWORD *)v41,
+                *(_QWORD *)v40);
+
+```
+ Using the previous technique in question 4 and 6, we can get the opcode `FF 50 60`
+
+
+## Identify the killswitch domain name the binary attempts to resolve.
+
+Identify the Encrypted String: From the disassembly, we can find the Base64 encoded string that serves as the encrypted data: `KXgmYHMADxsV8uHiuPPB3w==`.
+Now we have to recreate the XOR key. We found the key generation algorithm previously in Question 5. 
+```c
+do
+{
+  *((_BYTE *)&pHints.ai_flags + v6) = 7 * v6 + 66;
+  ++v6;
+}
+while ( v6 < 0x20 );
+```
+we know the key is generated using this code so Converting this to Python, we get something like:
+
+```py
+
+seq = bytes((7 * i + 0x42) & 0xFF for i in range(32))
+```
+
+by performing a Base64 encoding the key, we get: `QklQV15lbHN6gYiPlp2kq7K5wMfO1dzj6vH4/wYNFBs=`
+and now we can decrypt the domain name by XORing the newly generated key and the encoded key from the decompiled code we get the domain name that is resolved by the binary `k1v7-echosim.net`
+
+# conclusion
+
+at the final This challenge was a great exercise in combining different static analysis techniques and i hope you get some benefit from reading my writeup until the next time 
 
