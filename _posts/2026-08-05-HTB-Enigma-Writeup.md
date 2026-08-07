@@ -191,11 +191,11 @@ there is a readable pdf file and by reading it we get the credentials to use for
 now we are inside the webmail page the first thing to do it get the version of this software and see if it has any vulnerability on it from the public exploits , but nothing there , when i was playing around i found a mail from sarah (which seems our next target) , trying to login to the webmail using username `sarah` and the default password `Enigma2024!` and it worked, we are in . 
 after browsing in sarah's sendbox we can find an `admin` credentials there for another exposed subdomain  
 
-![ admin credits  ](/assets/images/writeupsLinux/Enigma/admin-credits.png)
+![ admin credits  ](/assets/images/writeups/Linux/Enigma/admin-credits.png)
 
 adding the subdomain to our hosts file and access it reveal an `OpenSTAManager` login panel   , login with admin credits , and the first step is identifying the version which is `2.9.8`  and by quick google search we see that This OpenSTAManager version is vulnerable to an OS Command Injection in P7M File Processing `CVE-2025-69212`:  https://github.com/advisories/GHSA-25fp-8w8p-mx36
 
-![ OpenSTAManager version  ](/assets/images/writeupsLinux/Enigma/version.png)
+![ OpenSTAManager version  ](/assets/images/writeups/Linux/Enigma/version.png)
 
 
 by following the POC steps to exploit the vulnerability   
@@ -216,7 +216,7 @@ with zipfile.ZipFile('exploit.zip', 'w') as zf:
 
 then upload the zip file and then it should return an error
 
-![ Exploiting the vulnerability  ](/assets/images/writeupsLinux/Enigma/exploitation-error.png)
+![ Exploiting the vulnerability  ](/assets/images/writeups/Linux/Enigma/exploitation-error.png)
 
 this error fires after our injected filename already ran through exec() so our exploit works , let's confirm that 
 
@@ -413,7 +413,7 @@ haris@enigma:~$
 but what is `OliveTin` and why we are interested in it. `OliveTin` is an administration panel that exposes predefined shell commands as web operations, and if the service is running as root, any insecure operation parameters become permission boundaries.
 now we access the web page we see `OliveTin 3000.10.0 ` is the version, and there are plenty of vulnerable targets here.
 
-![ accessing OliveTin web page  ](/assets/images/writeupsLinux/Enigma/OliveTin.png)
+![ accessing OliveTin web page  ](/assets/images/writeups/Linux/Enigma/OliveTin.png)
 
 
 then Checked the OliveTin yaml file for the configuration and found some interesting things like `authRequireGuestsToLogin` is set to false which means a guest user can do anything without login to `OliveTin` there is also another thing that catches my eyes that can be vulnerable to command injection `CVE-2026-27626` 
@@ -492,7 +492,7 @@ add this password on the password field in the web page of OliveTin and will run
 db_pass = x' ; id ; #
 ```
 
-![ getting root from  OliveTin web page ](/assets/images/writeupsLinux/Enigma/OliveTin-root.png)
+![ getting root from  OliveTin web page ](/assets/images/writeups/Linux/Enigma/OliveTin-root.png)
 
 now to get root shell we saw previously `canExec`: true for an unauthenticated request is the confirmation, this is triggerable without ever logging in. With the bindingId known, the payload drops a setuid copy of bash rather than trying to smuggle an interactive shell through the API directly:
 
