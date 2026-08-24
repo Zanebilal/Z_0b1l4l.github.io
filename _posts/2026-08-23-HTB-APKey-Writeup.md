@@ -94,7 +94,7 @@ we open the smali file of the `MainActivity` and searching where hashed password
 
  i choosed to use `patched` as my password  and hash it, then replaced it with the hash in the smali code , and thats all, now the app when it does the check of the password the check passes, but we need to rebuild the app one again to apply our patch
 
-### Step 03 : Building and Signing the app
+## Step 03 : Building and Signing the app
 
 using apktool once again to build the application 
 ```shell
@@ -107,7 +107,7 @@ and Since Android does not allow application that are not signed to run, we need
 
 all of this is set let's uninstalled the original application and installed the newly modified version.
 
-### Step 04: Running the patched app
+## Step 04: Running the patched app
 
 now let's run our patched app , provide the credentials ( make sure to pass the password you hashed and put it in the smali code) and now we bypass the authentication successfully, and the flag is retrieved 🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
 
