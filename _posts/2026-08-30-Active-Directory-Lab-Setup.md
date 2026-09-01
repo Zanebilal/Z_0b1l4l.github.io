@@ -70,7 +70,7 @@ now close the server manager and in the search bar of windows search for `groupe
 
 ![  creating a GPO ](/assets/images/Active-Directory/Active-directory-series/episode01/gpo-01.png)
 
-![  creating a GPO ](/assets/images/Active-Directory/Active-directory-series/episode01/gpo-0.png)
+![  creating a GPO ](/assets/images/Active-Directory/Active-directory-series/episode01/gpo-02.png)
 
 ![  creating a GPO ](/assets/images/Active-Directory/Active-directory-series/episode01/gpo-03.png)
 
